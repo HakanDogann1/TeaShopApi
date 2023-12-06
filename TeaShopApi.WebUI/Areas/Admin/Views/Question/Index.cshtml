@@ -1,0 +1,47 @@
+﻿@model List<ResultQuestionDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-header">
+            <h5>Soru Cevap Tablosu</h5>
+        </div>
+        <div class="card-body table-border-style">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Soru</th>
+                            <th>Cevap</th>
+                            <th>Sil</th>
+                            <th>Güncelle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>@item.QuestionDetail</td>
+                                <td>@item.AnswerDetail</td>
+                                <td><a asp-area="Admin" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.QuestionId" class="btn btn-danger">Sil</a></td>
+                                <td><a asp-area="Admin" asp-controller="Question" asp-action="UpdateQuestion" asp-route-id="@item.QuestionId" class="btn btn-warning">Güncelle</a></td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+                <br />
+                <a asp-area="Admin" asp-controller="Question" asp-action="CreateQuestion" class="btn btn-dark">Ekle</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
