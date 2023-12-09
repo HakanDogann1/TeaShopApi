@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeaShopApi.BusinessLayer.Abstract;
+using TeaShopApi.CommonLayer;
+using TeaShopApi.CommonLayer.Enums;
 using TeaShopApi.DataAccessLayer.Abstract;
 using TeaShopApi.EntityLayer.Concrete;
 
@@ -18,29 +20,37 @@ namespace TeaShopApi.BusinessLayer.Concrete
             _drinkDal = drinkDal;
         }
 
-        public void TAdd(Drink entity)
+        public async Task<Response<Drink>> TAdd(Drink entity)
         {
-            _drinkDal.Add(entity);
+            await _drinkDal.Add(entity);
+            return Response<Drink>.Success(entity,ResponseType.Success);
+
         }
 
-        public List<Drink> TGetAll()
+        public async Task<Response<List<Drink>>> TGetAll()
         {
-            return _drinkDal.GetAll();
+            var value = await _drinkDal.GetAll();
+            return Response<List<Drink>>.Success(value,ResponseType.Success);
         }
 
-        public Drink TGetById(int id)
+        public async Task<Response<Drink>> TGetById(int id)
         {
-            return _drinkDal.GetById(id);
+            var value = await _drinkDal.GetById(id);
+            return Response<Drink>.Success(value,ResponseType.Success);
         }
 
-        public void TRemove(Drink entity)
+        public async Task<Response<NoContent>> TRemove(int id)
         {
-            _drinkDal.Remove(entity);
+            var value = await _drinkDal.GetById(id);
+            _drinkDal.Remove(value);
+            return Response<NoContent>.Success(ResponseType.Success);
         }
 
-        public void TUpdate(Drink entity)
+        public Response<NoContent> TUpdate(Drink entity)
         {
             _drinkDal.Update(entity);
+            return Response<NoContent>.Success(ResponseType.Success);
+
         }
     }
 }

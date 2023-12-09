@@ -22,8 +22,17 @@ namespace TeaShopApi.BusinessLayer.Extensions
             services.AddScoped<IQuestionService, QuestionManager>();
             services.AddScoped<IQuestionDal, EfQuestionDal>();
 
-            services.AddScoped<IStatisticDal, EfStatisticDal>();
-            services.AddScoped<IStatisticService, StatisticManager>();
+            services.AddScoped<IAboutDal, EfAboutDal>();
+            services.AddScoped<IAboutService, AboutManager>();
+
+            services.AddScoped<IMessageDal, EfMessageDal>();
+            services.AddScoped<IMessageService, MessageManager>();
+
+            services.AddScoped<IPricingDal, EfPricingDal>();
+            services.AddScoped<IPricingService, PricingManager>();
+
+            services.AddScoped<ITestimonialDal, EfTestimonialDal>();
+            services.AddScoped<ITestimonialService, TestimonialManager>();
 
         }
     }

@@ -20,9 +20,9 @@ namespace TeaShopApi.Controllers
             return Ok(_statisticService.TDrinkAveragePrice());
         }
         [HttpGet]
-        public IActionResult GetDrinkMaxPrice()
+        public async Task<IActionResult> GetDrinkMaxPrice()
         {
-            return Ok(_statisticService.TMaxPriceDrink());
+            return Ok(await _statisticService.TMaxPriceDrink());
         }
         [HttpGet]
         public IActionResult GetDrinkCount()
@@ -30,9 +30,9 @@ namespace TeaShopApi.Controllers
             return Ok(_statisticService.TDrinkCount());
         }
         [HttpGet]
-        public IActionResult GetLastDrinkName()
+        public async Task<IActionResult> GetLastDrinkName()
         {
-            return Ok(_statisticService.TLastDrinkName());
+            return Ok(await _statisticService.TLastDrinkName());
         }
 
     }

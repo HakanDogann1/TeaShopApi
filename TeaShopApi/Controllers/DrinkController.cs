@@ -20,21 +20,21 @@ namespace TeaShopApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var value = _drinkService.TGetAll();
+            var value =await _drinkService.TGetAll();
             return Ok(value);
         }
         [HttpGet("{id}")]
-        public IActionResult GetDrink(int id)
+        public async Task<IActionResult> GetDrink(int id)
         {
-            var value = _drinkService.TGetById(id);
+            var value =await _drinkService.TGetById(id);
             return Ok(value);
         }
         [HttpPost]
-        public IActionResult AddDrink(CreateDrinkDto drink)
+        public async Task<IActionResult> AddDrink(CreateDrinkDto drink)
         {
-            _drinkService.TAdd(CreateMapper.mapper.Map<Drink>(drink));
+            await _drinkService.TAdd(CreateMapper.mapper.Map<Drink>(drink));
             return Ok();
         }
         [HttpPut]
@@ -44,10 +44,9 @@ namespace TeaShopApi.Controllers
             return Ok();
         }
         [HttpDelete("{id}")]
-        public IActionResult DeleteDrink(int id)
+        public async Task<IActionResult> DeleteDrink(int id)
         {
-            var value = _drinkService.TGetById(id);
-            _drinkService.TRemove(value);
+            await _drinkService.TRemove(id);
             return Ok("İçerik silindi");
         }
        

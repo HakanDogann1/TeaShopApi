@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,15 +28,15 @@ namespace TeaShopApi.DataAccessLayer.EntityFramework
             return _context.Drinks.Count();
         }
 
-        public string LastDrinkName()
+        public async Task<string> LastDrinkName()
         {
-            return _context.Drinks.OrderByDescending(x => x.DrinkId).Take(1).Select(x=>x.DrinkName).FirstOrDefault()!;
+            return await _context.Drinks.OrderByDescending(x => x.DrinkId).Take(1).Select(x=>x.DrinkName).FirstOrDefaultAsync()!;
         }
 
-        public string MaxPriceDrink()
+        public async Task<string> MaxPriceDrink()
         {
             decimal price = _context.Drinks.Max(x => x.DrinkPrice);
-            string value = _context.Drinks.Where(x=>x.DrinkPrice==price).Select(y=>y.DrinkName).FirstOrDefault()!;
+            string value =await _context.Drinks.Where(x=>x.DrinkPrice==price).Select(y=>y.DrinkName).FirstOrDefaultAsync()!;
             return value;
         }
     }

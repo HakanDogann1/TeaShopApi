@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeaShopApi.CommonLayer;
 
 namespace TeaShopApi.BusinessLayer.Abstract
 {
     public interface IStatisticService
     {
-        int TDrinkCount();
-        decimal TDrinkAveragePrice();
-        string TLastDrinkName();
-        string TMaxPriceDrink();
+        Response<int> TDrinkCount();
+        Response<decimal> TDrinkAveragePrice();
+        Task<Response<string>> TLastDrinkName();
+        Task<Response<string>> TMaxPriceDrink();
     }
 }

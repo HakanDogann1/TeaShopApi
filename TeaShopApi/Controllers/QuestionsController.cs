@@ -18,28 +18,27 @@ namespace TeaShopApi.Controllers
             _questionService = questionService;
         }
         [HttpGet]
-        public IActionResult GetList()
+        public async Task<IActionResult> GetList()
         {
-            var values = _questionService.TGetAll();
+            var values =await _questionService.TGetAll();
             return Ok(values);
         }
         [HttpPost]
-        public IActionResult CreateQuestion(CreateQuestionDto createQuestionDto)
+        public async Task<IActionResult> CreateQuestion(CreateQuestionDto createQuestionDto)
         {
-            _questionService.TAdd(CreateMapper.mapper.Map<Question>(createQuestionDto));
+            await _questionService.TAdd(CreateMapper.mapper.Map<Question>(createQuestionDto));
             return Ok("Soru başarılı bir şekilde eklendi.");
         }
         [HttpDelete("{id}")]
-        public IActionResult DeleteQuestion(int id)
+        public async Task<IActionResult> DeleteQuestion(int id)
         {
-            var value = _questionService.TGetById(id);
-            _questionService.TRemove(value);
+           await _questionService.TRemove(id);
             return Ok("Soru başarıyla silindi.");
         }
         [HttpGet("{id}")]
-        public IActionResult GetQuestion(int id)
+        public async Task<IActionResult> GetQuestion(int id)
         {
-            var value = _questionService.TGetById(id);
+            var value =await _questionService.TGetById(id);
             return Ok(value);
         }
         [HttpPut]

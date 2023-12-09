@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeaShopApi.BusinessLayer.Abstract;
+using TeaShopApi.CommonLayer;
+using TeaShopApi.CommonLayer.Enums;
 using TeaShopApi.DataAccessLayer.Abstract;
 
 namespace TeaShopApi.BusinessLayer.Concrete
@@ -17,24 +19,28 @@ namespace TeaShopApi.BusinessLayer.Concrete
             _statisticDal = statisticDal;
         }
 
-        public decimal TDrinkAveragePrice()
+        public Response<decimal> TDrinkAveragePrice()
         {
-            return _statisticDal.DrinkAveragePrice();
+            var value = _statisticDal.DrinkAveragePrice();
+            return Response<decimal>.Success(value,ResponseType.Success);
         }
 
-        public int TDrinkCount()
+        public Response<int> TDrinkCount()
         {
-            return _statisticDal.DrinkCount();
+            var value = _statisticDal.DrinkCount();
+            return Response<int>.Success(value, ResponseType.Success);
         }
 
-        public string TLastDrinkName()
+        public async Task<Response<string>> TLastDrinkName()
         {
-           return _statisticDal.LastDrinkName();
+            var value =await _statisticDal.LastDrinkName();
+            return Response<string>.Success(value, ResponseType.Success);
         }
 
-        public string TMaxPriceDrink()
+        public async Task<Response<string>> TMaxPriceDrink()
         {
-            return _statisticDal.MaxPriceDrink();
+            var value =await _statisticDal.MaxPriceDrink();
+            return Response<string>.Success(value, ResponseType.Success);
         }
     }
 }

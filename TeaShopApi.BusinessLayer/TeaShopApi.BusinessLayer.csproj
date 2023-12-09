@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ValidationRules\" />
+    <Compile Remove="ValidationRules\**" />
+    <EmbeddedResource Remove="ValidationRules\**" />
+    <None Remove="ValidationRules\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TeaShopApi.CommonLayer\TeaShopApi.CommonLayer.csproj" />
     <ProjectReference Include="..\TeaShopApi.DataAccessLayer\TeaShopApi.DataAccessLayer.csproj" />
     <ProjectReference Include="..\TeaShopApi.DtoLayer\TeaShopApi.DtoLayer.csproj" />
   </ItemGroup>

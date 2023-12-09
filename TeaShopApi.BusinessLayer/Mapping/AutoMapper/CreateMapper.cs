@@ -15,6 +15,7 @@ namespace TeaShopApi.BusinessLayer.Mapping.AutoMapper
             {
                 opt.AddProfile<TeaShopMapping>();
             });
+
             return config.CreateMapper();
         });
 

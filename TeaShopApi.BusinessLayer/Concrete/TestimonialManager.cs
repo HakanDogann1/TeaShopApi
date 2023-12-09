@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeaShopApi.BusinessLayer.Abstract;
+using TeaShopApi.CommonLayer.Enums;
+using TeaShopApi.CommonLayer;
 using TeaShopApi.DataAccessLayer.Abstract;
 using TeaShopApi.EntityLayer.Concrete;
 
@@ -13,34 +15,40 @@ namespace TeaShopApi.BusinessLayer.Concrete
     {
         private readonly ITestimonialDal _testimonialDal;
 
-        public TestimonialManager(ITestimonialDal testimonialDal)
+        public TestimonialManager(ITestimonialDal TestimonialDal)
         {
-            _testimonialDal = testimonialDal;
+            _testimonialDal = TestimonialDal;
         }
 
-        public void TAdd(Testimonial entity)
+        public async Task<Response<Testimonial>> TAdd(Testimonial entity)
         {
-            _testimonialDal.Add(entity);
+            await _testimonialDal.Add(entity);
+            return Response<Testimonial>.Success(ResponseType.Success);
         }
 
-        public List<Testimonial> TGetAll()
+        public async Task<Response<List<Testimonial>>> TGetAll()
         {
-            return _testimonialDal.GetAll();
+            var value = await _testimonialDal.GetAll();
+            return Response<List<Testimonial>>.Success(value, ResponseType.Success);
         }
 
-        public Testimonial TGetById(int id)
+        public async Task<Response<Testimonial>> TGetById(int id)
         {
-            return _testimonialDal.GetById(id);
+            var value = await _testimonialDal.GetById(id);
+            return Response<Testimonial>.Success(value, ResponseType.Success);
         }
 
-        public void TRemove(Testimonial entity)
+        public async Task<Response<NoContent>> TRemove(int id)
         {
-            _testimonialDal.Remove(entity);
+            var value = await _testimonialDal.GetById(id);
+            _testimonialDal.Remove(value);
+            return Response<NoContent>.Success(ResponseType.Success);
         }
 
-        public void TUpdate(Testimonial entity)
+        public Response<NoContent> TUpdate(Testimonial entity)
         {
             _testimonialDal.Update(entity);
+            return Response<NoContent>.Success(ResponseType.Success);
         }
     }
 }

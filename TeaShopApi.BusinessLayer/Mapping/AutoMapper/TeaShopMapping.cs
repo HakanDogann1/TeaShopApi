@@ -17,6 +17,14 @@ namespace TeaShopApi.BusinessLayer.Mapping.AutoMapper
             CreateMap<UpdateDrinkDto,Drink>().ReverseMap();
             CreateMap<CreateQuestionDto,Question>().ReverseMap();
             CreateMap<UpdateQuestionDto,Question>().ReverseMap();
+            CreateMap<CreateAboutDto,About>().ReverseMap();
+            CreateMap<UpdateAboutDto,About>().ReverseMap();
+            CreateMap<CreateMessageDto,Message>().ReverseMap();
+            CreateMap<UpdateMessageDto,Message>().ReverseMap();
+            CreateMap<CreatePricingDto,Pricing>().ReverseMap();
+            CreateMap<UpdatePricingDto,Pricing>().ReverseMap();
+            CreateMap<CreateTestimonialDto,Testimonial>().ReverseMap();
+            CreateMap<UpdateTestimonialDto,Testimonial>().ReverseMap();
         }
     }
 }

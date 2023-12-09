@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeaShopApi.EntityLayer.Concrete;
 
 namespace TeaShopApi.DataAccessLayer.Abstract
 {
-    public interface IStatisticDal
+    public interface IAboutDal:IGenericDal<About>
     {
-        int DrinkCount();
-        decimal DrinkAveragePrice();
-        Task<string> LastDrinkName();
-        Task<string> MaxPriceDrink();
     }
 }

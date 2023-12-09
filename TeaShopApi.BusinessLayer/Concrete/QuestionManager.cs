@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeaShopApi.BusinessLayer.Abstract;
+using TeaShopApi.CommonLayer.Enums;
+using TeaShopApi.CommonLayer;
 using TeaShopApi.DataAccessLayer.Abstract;
 using TeaShopApi.EntityLayer.Concrete;
 
@@ -13,34 +15,40 @@ namespace TeaShopApi.BusinessLayer.Concrete
     {
         private readonly IQuestionDal _questionDal;
 
-        public QuestionManager(IQuestionDal questionDal)
+        public QuestionManager(IQuestionDal QuestionDal)
         {
-            _questionDal = questionDal;
+            _questionDal = QuestionDal;
         }
 
-        public void TAdd(Question entity)
+        public async Task<Response<Question>> TAdd(Question entity)
         {
-            _questionDal.Add(entity);
+            await _questionDal.Add(entity);
+            return Response<Question>.Success(ResponseType.Success);
         }
 
-        public List<Question> TGetAll()
+        public async Task<Response<List<Question>>> TGetAll()
         {
-            return _questionDal.GetAll();
+            var value = await _questionDal.GetAll();
+            return Response<List<Question>>.Success(value, ResponseType.Success);
         }
 
-        public Question TGetById(int id)
+        public async Task<Response<Question>> TGetById(int id)
         {
-            return _questionDal.GetById(id);
+            var value = await _questionDal.GetById(id);
+            return Response<Question>.Success(value, ResponseType.Success);
         }
 
-        public void TRemove(Question entity)
+        public async Task<Response<NoContent>> TRemove(int id)
         {
-            _questionDal.Remove(entity);
+            var value = await _questionDal.GetById(id);
+            _questionDal.Remove(value);
+            return Response<NoContent>.Success(ResponseType.Success);
         }
 
-        public void TUpdate(Question entity)
+        public Response<NoContent> TUpdate(Question entity)
         {
             _questionDal.Update(entity);
+            return Response<NoContent>.Success(ResponseType.Success);
         }
     }
 }

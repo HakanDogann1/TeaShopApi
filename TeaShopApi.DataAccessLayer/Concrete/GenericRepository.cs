@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,32 +18,29 @@ namespace TeaShopApi.DataAccessLayer.Concrete
             _context = context;
         }
 
-        public void Add(T entity)
+        public async Task Add(T entity)
         {
-            _context.Add(entity);
-            _context.SaveChanges();
+            await _context.AddAsync(entity);
         }
 
-        public List<T> GetAll()
+        public async Task<List<T>> GetAll()
         {
-            return _context.Set<T>().ToList();
+            return await _context.Set<T>().ToListAsync();
         }
 
-        public T GetById(int id)
+        public async Task<T> GetById(int id)
         {
-            return _context.Set<T>().Find(id)!;
+            return await _context.Set<T>().FindAsync(id);
         }
 
         public void Remove(T entity)
         {
             _context.Remove(entity);
-            _context.SaveChanges();
         }
 
         public void Update(T entity)
         {
-            _context.Update(entity);
-            _context.SaveChanges();
+            _context.Set<T>().Update(entity);
         }
     }
 }
